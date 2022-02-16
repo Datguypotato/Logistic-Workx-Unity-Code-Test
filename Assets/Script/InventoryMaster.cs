@@ -11,6 +11,8 @@ public class InventoryMaster : MonoBehaviour
     [SerializeField]
     private int ySize;
 
+    // TODO cellSize
+
     [SerializeField]
     private GameObject slotPrefab;
 
