@@ -11,7 +11,11 @@ public class InventoryMaster : MonoBehaviour
     [SerializeField]
     private int ySize;
 
-    // TODO cellSize
+    //
+    //private bool activeInventory;
+
+    // the current item you are holding
+    private Item currentItem;
 
     [SerializeField]
     private GameObject slotPrefab;
@@ -28,8 +32,14 @@ public class InventoryMaster : MonoBehaviour
         {
             for (int y = 0; y < ySize; y++)
             {
-                Instantiate(slotPrefab, this.transform);
+                GameObject slotObject = Instantiate(slotPrefab, this.transform);
+                slotObject.GetComponent<InventorySlot>().Assign(this);
             }
         }
+    }
+
+    public Item GetCurrentItem()
+    {
+        return currentItem;
     }
 }
