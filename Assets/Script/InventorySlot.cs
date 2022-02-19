@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// TODO Item splitting
+
 public class InventorySlot : MonoBehaviour
 {
     [SerializeField]

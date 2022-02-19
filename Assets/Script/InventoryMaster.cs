@@ -60,8 +60,6 @@ public class InventoryMaster : MonoBehaviour
 
     private void Update()
     {
-        // TODO Show current item holding
-
         // show/hide mousefollow sprite
         if (currentItem != null)
         {
