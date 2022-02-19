@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -10,7 +12,13 @@ public class InventorySlot : MonoBehaviour
     private InventoryMaster master;
 
     [SerializeField]
-    private Item currentItem;
+    private Item slotItem;
+
+    [SerializeField]
+    private Image slotSprite;
+
+    [SerializeField]
+    private TMP_Text counter;
 
     /// <summary>
     /// Start function
@@ -19,6 +27,7 @@ public class InventorySlot : MonoBehaviour
     public void Assign(InventoryMaster a_Master)
     {
         master = a_Master;
+        UpdateGraphics();
     }
 
     public void OnLeftClick()
@@ -30,10 +39,11 @@ public class InventorySlot : MonoBehaviour
         {
             // grab
             Debug.Log("Grab");
+            Grab();
         }
         else
         {
-            if (currentItem == null)
+            if (slotItem == null)
             {
                 Debug.Log("Insert");
 
@@ -42,17 +52,26 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
-                if (currentItem == playerItemHolding)
+                if (slotItem == playerItemHolding)
                 {
                     // add item
+                    Add(playerItemHolding.currentAmount);
                 }
                 else
                 {
                     // put item into player hand
                     // put playerhand item into the item slot
+                    Swap(playerItemHolding);
                 }
             }
         }
+
+        UpdateGraphics();
+    }
+
+    public void OnRightClick()
+    {
+        Debug.Log("Right click inventoryslot");
     }
 
     /// <summary>
@@ -67,13 +86,44 @@ public class InventorySlot : MonoBehaviour
         }
         else
         {
-            currentItem = a_Item;
+            slotItem = a_Item;
+            slotSprite.sprite = a_Item.itemSprite;
             master.SetCurrentItem(null);
         }
     }
 
-    public void OnRightClick()
+    private void Add(int a_Amount)
     {
-        Debug.Log("Right click inventoryslot");
+        slotItem.currentAmount += a_Amount;
+        master.SetCurrentItem(null);
+    }
+
+    private void Grab()
+    {
+        master.SetCurrentItem(slotItem);
+        slotItem = null;
+    }
+
+    private void Swap(Item a_Item)
+    {
+        Item temp = slotItem;
+
+        slotItem = a_Item;
+        master.SetCurrentItem(temp);
+    }
+
+    private void UpdateGraphics()
+    {
+        if (slotItem == null)
+        {
+            slotSprite.color = Color.clear;
+            counter.text = "";
+        }
+        else
+        {
+            slotSprite.color = Color.white;
+            counter.text = slotItem.currentAmount.ToString();
+            slotSprite.sprite = slotItem.itemSprite;
+        }
     }
 }

@@ -447,8 +447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caecd94925066ea43b5ead2556a7875e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 2
-  ySize: 2
+  xSize: 5
+  ySize: 5
   canvasObject: {fileID: 206797303}
   currentItem: {fileID: 11400000, guid: c2f2d5377331ca24ca1e56a251edfb91, type: 2}
   mouseFollowerPrefab: {fileID: 5958769680807777180, guid: a3ba512e4b21e244faddd6420e7b42ff, type: 3}
