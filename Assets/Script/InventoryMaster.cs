@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryMaster : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class InventoryMaster : MonoBehaviour
     [SerializeField]
     private int ySize;
 
+    [Space(10)]
     [SerializeField]
     private GameObject canvasObject;
 
@@ -25,6 +27,7 @@ public class InventoryMaster : MonoBehaviour
 
     private RectTransform mouseFollower;
     private Image mouseImage;
+    private TMP_Text mouseCounter;
     private Vector2 pos;
 
     [SerializeField]
@@ -43,6 +46,7 @@ public class InventoryMaster : MonoBehaviour
         mouseFollower = Instantiate(mouseFollowerPrefab, canvasObject.transform).GetComponent<RectTransform>();
         mouseFollower.SetParent(canvasObject.transform);
         mouseImage = mouseFollower.GetComponent<Image>();
+        mouseCounter = mouseFollower.GetComponentInChildren<TMP_Text>();
 
         for (int x = 0; x < xSize; x++)
         {
@@ -59,19 +63,35 @@ public class InventoryMaster : MonoBehaviour
         // TODO Show current item holding
 
         // show/hide mousefollow sprite
-        mouseImage.color = currentItem == null ? Color.clear : Color.white;
+        if (currentItem != null)
+        {
+            mouseImage.color = Color.white;
+        }
+        else
+        {
+            mouseImage.color = Color.clear;
+            mouseCounter.text = "";
+        }
 
         if (currentItem == null)
             return;
 
         // sprite following mouse when holding a item
-
         // https://stackoverflow.com/questions/43802207/position-ui-to-mouse-position-make-tooltip-panel-follow-cursor
-        mouseFollower.anchoredPosition = Input.mousePosition / canvasObject.transform.localScale.x;
+        Vector3 offset = Vector3.one * 50;
+        mouseFollower.anchoredPosition = Input.mousePosition / canvasObject.transform.localScale.x + offset;
+
+        mouseImage.sprite = currentItem.itemSprite;
+        mouseCounter.text = currentItem.currentAmount.ToString();
     }
 
     public Item GetCurrentItem()
     {
         return currentItem;
+    }
+
+    public void SetCurrentItem(Item a_Item)
+    {
+        currentItem = a_Item;
     }
 }

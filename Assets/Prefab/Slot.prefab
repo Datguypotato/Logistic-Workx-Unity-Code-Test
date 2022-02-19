@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5837856601612258079}
   - component: {fileID: 5837856601612258078}
   - component: {fileID: 134435489758319862}
+  - component: {fileID: -7898276351787649255}
   - component: {fileID: 5268542371677600252}
   m_Layer: 5
   m_Name: Slot
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9245283, g: 0.6933962, b: 0.6933962, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -120,10 +121,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5837856601612258078}
   m_OnClick:
     m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-7898276351787649255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5837856601612258076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6ce4c70736d2646ab9cd44f40458c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftClick:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5268542371677600252}
         m_TargetAssemblyTypeName: InventorySlot, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnLeftClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  middleClick:
+    m_PersistentCalls:
+      m_Calls: []
+  rightClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5268542371677600252}
+        m_TargetAssemblyTypeName: InventorySlot, Assembly-CSharp
+        m_MethodName: OnRightClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

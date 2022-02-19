@@ -9,6 +9,7 @@ public class InventorySlot : MonoBehaviour
 
     private InventoryMaster master;
 
+    [SerializeField]
     private Item currentItem;
 
     /// <summary>
@@ -20,7 +21,7 @@ public class InventorySlot : MonoBehaviour
         master = a_Master;
     }
 
-    public void OnClick()
+    public void OnLeftClick()
     {
         Debug.Log("Click on inventoryslot");
 
@@ -28,12 +29,16 @@ public class InventorySlot : MonoBehaviour
         if (playerItemHolding == null)
         {
             // grab
+            Debug.Log("Grab");
         }
         else
         {
             if (currentItem == null)
             {
+                Debug.Log("Insert");
+
                 // set new item in slot
+                Insert(playerItemHolding);
             }
             else
             {
@@ -58,6 +63,17 @@ public class InventorySlot : MonoBehaviour
     {
         if (a_Item == null)
         {
+            return;
         }
+        else
+        {
+            currentItem = a_Item;
+            master.SetCurrentItem(null);
+        }
+    }
+
+    public void OnRightClick()
+    {
+        Debug.Log("Right click inventoryslot");
     }
 }
