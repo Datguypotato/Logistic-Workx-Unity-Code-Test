@@ -28,10 +28,13 @@ public class InventoryMaster : MonoBehaviour
     private RectTransform mouseFollower;
     private Image mouseImage;
     private TMP_Text mouseCounter;
-    private Vector2 pos;
 
+    // prefabs
     [SerializeField]
     private GameObject slotPrefab;
+
+    [SerializeField]
+    private GameObject slotGarbagePrefab;
 
     // Start is called before the first frame update
     private void Start()
@@ -53,9 +56,12 @@ public class InventoryMaster : MonoBehaviour
             for (int y = 0; y < ySize; y++)
             {
                 GameObject slotObject = Instantiate(slotPrefab, this.transform);
-                slotObject.GetComponent<InventorySlot>().Assign(this);
+                slotObject.GetComponent<InventoryBaseSlot>().Assign(this);
             }
         }
+
+        GameObject slotGarbageObject = Instantiate(slotGarbagePrefab, this.transform);
+        slotGarbageObject.GetComponent<InventoryBaseSlot>().Assign(this);
     }
 
     private void Update()

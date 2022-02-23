@@ -6,12 +6,10 @@ using TMPro;
 
 // TODO Item splitting
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : InventoryBaseSlot
 {
     [SerializeField]
     private int maxSize;
-
-    private InventoryMaster master;
 
     [SerializeField]
     private Item slotItem;
@@ -22,19 +20,15 @@ public class InventorySlot : MonoBehaviour
     [SerializeField]
     private TMP_Text counter;
 
-    /// <summary>
-    /// Start function
-    /// </summary>
-    /// <param name="a_Master"></param>
-    public void Assign(InventoryMaster a_Master)
+    public override void Assign(InventoryMaster a_Master)
     {
-        master = a_Master;
+        base.Assign(a_Master);
         UpdateGraphics();
     }
 
     #region Left click
 
-    public void OnLeftClick()
+    public override void OnLeftClick()
     {
         Debug.Log("Click on inventoryslot");
 
@@ -116,7 +110,7 @@ public class InventorySlot : MonoBehaviour
 
     #region Right click
 
-    public void OnRightClick()
+    public override void OnRightClick()
     {
         Item playerItemHolding = master.GetCurrentItem();
 
