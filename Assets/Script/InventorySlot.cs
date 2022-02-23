@@ -30,20 +30,20 @@ public class InventorySlot : InventoryBaseSlot
 
     public override void OnLeftClick()
     {
-        Debug.Log("Click on inventoryslot");
+        //Debug.Log("Click on inventoryslot");
 
         Item playerItemHolding = master.GetCurrentItem();
         if (playerItemHolding == null)
         {
             // grab
-            Debug.Log("Grab");
+            //Debug.Log("Grab");
             Grab();
         }
         else
         {
             if (slotItem == null)
             {
-                Debug.Log("Insert");
+                //Debug.Log("Insert");
 
                 // set new item in slot
                 Insert(playerItemHolding);
@@ -88,8 +88,17 @@ public class InventorySlot : InventoryBaseSlot
 
     private void Add(int a_Amount)
     {
-        slotItem.currentAmount += a_Amount;
-        master.SetCurrentItem(null);
+        if (slotItem.currentAmount + a_Amount > 64)
+        {
+            int delta = slotItem.maxStack - slotItem.currentAmount;
+            master.GetCurrentItem().currentAmount -= delta;
+            slotItem.currentAmount = 64;
+        }
+        else
+        {
+            slotItem.currentAmount += a_Amount;
+            master.SetCurrentItem(null);
+        }
     }
 
     private void Grab()
@@ -116,12 +125,16 @@ public class InventorySlot : InventoryBaseSlot
 
         if (playerItemHolding != null)
         {
-            // put one in the slot
-            slotItem = Item.CopyOneAmount(playerItemHolding.itemName, playerItemHolding.itemSprite, playerItemHolding.maxStack);
             playerItemHolding.currentAmount--;
-
-            if (playerItemHolding.currentAmount <= 0)
-                master.SetCurrentItem(null);
+            if (slotItem == null)
+            {
+                // put one in the slot
+                slotItem = Item.CopyOneAmount(playerItemHolding.itemName, playerItemHolding.itemSprite, playerItemHolding.maxStack);
+            }
+            else
+            {
+                slotItem.currentAmount++;
+            }
         }
         else
         {
@@ -150,5 +163,8 @@ public class InventorySlot : InventoryBaseSlot
             counter.text = slotItem.currentAmount.ToString();
             slotSprite.sprite = slotItem.itemSprite;
         }
+
+        if (master.GetCurrentItem() != null && master.GetCurrentItem().currentAmount <= 0)
+            master.SetCurrentItem(null);
     }
 }
