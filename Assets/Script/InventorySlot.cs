@@ -32,6 +32,8 @@ public class InventorySlot : MonoBehaviour
         UpdateGraphics();
     }
 
+    #region Left click
+
     public void OnLeftClick()
     {
         Debug.Log("Click on inventoryslot");
@@ -54,12 +56,13 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
-                if (slotItem == playerItemHolding)
+                Debug.Log(slotItem.itemName + " == " + playerItemHolding.itemName);
+                if (slotItem.itemName == playerItemHolding.itemName)
                 {
                     // add item
                     Add(playerItemHolding.currentAmount);
                 }
-                else
+                else // doesnt come through
                 {
                     // put item into player hand
                     // put playerhand item into the item slot
@@ -69,11 +72,6 @@ public class InventorySlot : MonoBehaviour
         }
 
         UpdateGraphics();
-    }
-
-    public void OnRightClick()
-    {
-        Debug.Log("Right click inventoryslot");
     }
 
     /// <summary>
@@ -113,6 +111,37 @@ public class InventorySlot : MonoBehaviour
         slotItem = a_Item;
         master.SetCurrentItem(temp);
     }
+
+    #endregion Left click
+
+    #region Right click
+
+    public void OnRightClick()
+    {
+        Item playerItemHolding = master.GetCurrentItem();
+
+        if (playerItemHolding != null)
+        {
+            // put one in the slot
+            slotItem = Item.CopyOneAmount(playerItemHolding.itemName, playerItemHolding.itemSprite, playerItemHolding.maxStack);
+            playerItemHolding.currentAmount--;
+
+            if (playerItemHolding.currentAmount <= 0)
+                master.SetCurrentItem(null);
+        }
+        else
+        {
+            // split grab the item
+
+            int half = slotItem.currentAmount / 2;
+            master.SetCurrentItem(Item.CreateInstance(slotItem.itemName, slotItem.itemSprite, slotItem.maxStack, half));
+            slotItem.currentAmount -= half;
+        }
+
+        UpdateGraphics();
+    }
+
+    #endregion Right click
 
     private void UpdateGraphics()
     {

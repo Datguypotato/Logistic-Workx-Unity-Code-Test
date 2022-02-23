@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c7b27c6cce93d49aec6afcc100defc, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  itemName: 
-  itemSprite: {fileID: 0}
-  maxStack: 0
+  itemName: Stone
+  itemSprite: {fileID: 21300000, guid: e12ad00251124d144b8fe106978091db, type: 3}
+  maxStack: 64
   currentAmount: 1
