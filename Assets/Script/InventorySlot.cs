@@ -50,13 +50,13 @@ public class InventorySlot : InventoryBaseSlot
             }
             else
             {
-                Debug.Log(slotItem.itemName + " == " + playerItemHolding.itemName);
+                //Debug.Log(slotItem.itemName + " == " + playerItemHolding.itemName);
                 if (slotItem.itemName == playerItemHolding.itemName)
                 {
                     // add item
                     Add(playerItemHolding.currentAmount);
                 }
-                else // doesnt come through
+                else
                 {
                     // put item into player hand
                     // put playerhand item into the item slot
@@ -74,16 +74,9 @@ public class InventorySlot : InventoryBaseSlot
     /// <param name="a_Item"></param>
     private void Insert(Item a_Item)
     {
-        if (a_Item == null)
-        {
-            return;
-        }
-        else
-        {
-            slotItem = a_Item;
-            slotSprite.sprite = a_Item.itemSprite;
-            master.SetCurrentItem(null);
-        }
+        slotItem = a_Item;
+        slotSprite.sprite = a_Item.itemSprite;
+        master.SetCurrentItem(null);
     }
 
     private void Add(int a_Amount)
@@ -125,15 +118,16 @@ public class InventorySlot : InventoryBaseSlot
 
         if (playerItemHolding != null)
         {
-            playerItemHolding.currentAmount--;
             if (slotItem == null)
             {
                 // put one in the slot
                 slotItem = Item.CopyOneAmount(playerItemHolding.itemName, playerItemHolding.itemSprite, playerItemHolding.maxStack);
+                playerItemHolding.currentAmount--;
             }
-            else
+            else if (playerItemHolding.itemName == slotItem.itemName && slotItem.currentAmount + 1 <= slotItem.maxStack)
             {
                 slotItem.currentAmount++;
+                playerItemHolding.currentAmount--;
             }
         }
         else

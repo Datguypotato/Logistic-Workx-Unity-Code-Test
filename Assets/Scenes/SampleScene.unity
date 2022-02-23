@@ -1620,8 +1620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caecd94925066ea43b5ead2556a7875e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 10
-  ySize: 10
+  xSize: 7
+  ySize: 2
   canvasObject: {fileID: 206797303}
   currentItem: {fileID: 0}
   mouseFollowerPrefab: {fileID: 5958769680807777180, guid: a3ba512e4b21e244faddd6420e7b42ff, type: 3}
@@ -2198,5 +2198,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0a71daec00d9849b5c74d7a05605a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  copyItem: {fileID: 11400000, guid: c2f2d5377331ca24ca1e56a251edfb91, type: 2}
+  copyItem: {fileID: 11400000, guid: 21bbef366419b9640b09994cb46e7a51, type: 2}
   inputField: {fileID: 1529118568}
